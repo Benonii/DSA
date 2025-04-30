@@ -1,0 +1,48 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        """ Bruteforce solution 
+            # Two index trackers i and j
+            # For each i check if every other number adds up to target
+            # Stop when indexes are found or list is exhausted
+        """
+        # for i in range (0, len(nums) - 1):
+        #     for j in range (i + 1, len(nums)):
+        #         if nums[i] + nums[j] == target:
+        #             return [i, j]
+        # return []
+
+        """ Two pass hash
+            # Loop through nums and create a hash table with the value as key
+              and index as value
+            # Loop through nums again and check if it's complement exists in the
+              has
+        """
+        # # create hash
+        # hash = {}
+        # for i in range (len(nums)):
+        #     hash[nums[i]] = i
+        
+        # # check for complement
+        # for i in range (len(nums)):
+        #     if target - nums[i] in hash.keys():
+        #         if i != hash[target - nums[i]]: 
+        #             return [i, hash[target - nums[i]]]
+        # return []
+
+        """ One pass hash
+            # Loop through nums to create a hash
+            # At the same time check if compliment is already in hash
+        """
+
+        # create hash and check for compliment
+        hash = {}
+        for i in range (len(nums)):
+            compliment = target - nums[i]
+            if compliment in hash and hash[compliment] != i:
+                return [i, hash[compliment]]
+            hash[nums[i]] = i
