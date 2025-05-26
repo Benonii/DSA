@@ -1,0 +1,28 @@
+class Solution(object):
+    def longestCommonPrefix(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: str
+        """
+        
+        # First solution
+            # Take the first letter of each string in list
+            # If it does not match, break and return empty string
+            # If it does match, save it and check next letters
+            # If a non-match is enountered break and return current string
+        
+        result = ""
+        # First we need to calculate the length of the shortest word in the
+            # list
+        limit = len(min(strs))
+
+        i = 0 
+        common_prefix = ""
+        while i < limit:
+            current_letter = strs[0][i]
+            for word in strs:
+                if not word[i] == current_letter:
+                    return common_prefix
+            common_prefix = common_prefix + current_letter
+            i += 1
+        return common_prefix
