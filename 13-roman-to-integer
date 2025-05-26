@@ -1,0 +1,90 @@
+class Solution(object):
+    def romanToInt(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        
+        # First solution
+            # Create a hash of roman symbols to number equivalents
+            # Look up the number value of encountered roman symbol and
+              # add to an accumulator
+            # If I, X, C are encountered check ahead to see what the next symbol is
+            # If I and next symbol is V or X
+            # If X and next symbol is L or C
+            # If C and next symbol is D or M
+                # Add the value of (next symbol - current symbol)
+
+        # symbol to number hash
+        s_to_n = {
+            "I": 1,
+            "V": 5,
+            "X": 10,
+            "L": 50, 
+            "C": 100,
+            "D": 500,
+            "M": 1000
+        }
+
+            # special_pairs_hash = {
+            #     "I": ["V", "X"],
+            #     "X": ["L", "C"],
+            #     "C": ["D", "M"]
+            # }
+
+            # final_number = 0
+            # i = 0
+            # while i < (len(s)):
+            #     current_symbol = s[i]
+            #     if current_symbol == 'I' or current_symbol == 'X' or current_symbol == 'C':
+            #         if (i < (len(s) - 1)):
+            #             next_symbol = s[i + 1]
+            #             if next_symbol in special_pairs_hash[current_symbol]:
+            #                 final_number += s_to_n[next_symbol] - s_to_n[current_symbol]
+            #                 # skip next symbol. It has already been considered
+            #                 i += 1
+            #             else:
+            #                 final_number += s_to_n[current_symbol]
+            #         else:
+            #             final_number += s_to_n[current_symbol]
+            #     else:
+            #         final_number += s_to_n[current_symbol]
+            #     i += 1
+            # return final_number
+
+        # Second solution
+            # Go through the array in reverse
+            # Add current value to accumulator
+            # Anytime the next value is less than current value, subtract instead of add
+            # Need to keep track of what the last value was (right?)
+            # final_number = 0
+            # i = len(s) - 1
+            # while i >= 0:
+            #     current_value = s_to_n[s[i]]
+            #     if i > 0:
+            #         next_value = s_to_n[s[i - 1]]
+            #         if next_value < current_value:
+            #             final_number += current_value - next_value
+            #             i -= 1
+            #         else:
+            #             final_number += current_value
+            #     else:
+            #         final_number += current_value
+            #     i -= 1
+            # return final_number
+        
+        # Third solution
+            # Mostly the same as second solution but start with the last symbol and
+              # Iterate from second to last symbol
+            
+        result = s_to_n[s[len(s) - 1]]
+        i = len(s) - 2
+        while i >= 0:
+            current_value = s_to_n[s[i]]
+            prev_value = s_to_n[s[i + 1]]
+            if current_value < prev_value:
+                result -= current_value
+            else:
+                result += current_value
+            i -= 1
+        return result  
